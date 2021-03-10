@@ -1,0 +1,11 @@
+{
+    "sqltools.connections": [
+        {
+            "database": "${workspaceFolder:flask_}/db.sqlite",
+            "driver": "SQLite",
+            "group": "1",
+            "name": "1",
+            "previewLimit": 50
+        }
+    ]
+}

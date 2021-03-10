@@ -14,6 +14,38 @@
             $(document).ready(function () {
                 $("#date").datepicker({});
             })
+
+            function createTodo(){
+                $.ajax({
+                    url: '/api/v1/todos',
+                    contentType:'application/json',
+                    method: 'POST',
+                    data: JSON.stringify({
+                        title: $("#title").val(),
+                        due: $("#date").val()
+
+                    })
+                }).done(function (res){
+                    $("#title").val('');
+                    $("#date").val('');
+
+                    window.location = '/';
+                });
+            }
+            function doneTodo(todo_id){
+                $.ajax({
+                    url: '/api/v1/todos/done',
+                    contentType:'application/json',
+                    method: 'PUT',
+                    data: JSON.stringify({
+                        todo_id: todo_id
+
+                    })
+                }).done(function (res){
+                    window.location = '/';
+                });
+            }
+
         </script>
     </head>
 
@@ -54,7 +86,7 @@
                     <input type="text" class="form-control" id="date" placeholder="기한">
                 </div>
                 <div class="col-12 col-sm-5 mt-2"> <!-- 확인-->
-                    <button type="button" class="btn btn-primary">생성</button> 
+                    <button type="button" class="btn btn-primary" onclick="createTodo();">생성</button> 
                 </div>
                 <h2 class="mt-4">할일 목록</h2>
             </div>
@@ -70,12 +102,23 @@
                             </tr>
                         </thead>
                         <tbody>
+                            {% for todo in todos %}
+                            {% if todo.status %}
                             <tr>
-                                <th scope="row">1</th>
-                                <td>Mark</td>
-                                <td>Otto</td>
-                                <td>@mdo</td>
+                                <th scope="row"><del>{{ todo.id }}</del></th>
+                                <td><del>{{ todo.title }}</del></td>
+                                <td><del>{{ todo.due }}</del></td>
+                                <td>완료</td>
                             </tr>
+                            {% else %}
+                                <tr>
+                                    <th scope="row">{{ todo.id }}</th>
+                                    <td>{{ todo.title }}</td>
+                                    <td>{{ todo.due }}</td>
+                                    <td><button type="button" class="btn btn-secondary" onclick="doneTodo({{ todo.id }});">완료</button></td>
+                                </tr>
+                            {% endif %}
+                            {% endfor %}
                         </tbody>
                     </table>
                 </div>

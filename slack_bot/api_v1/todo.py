@@ -2,7 +2,7 @@
 from flask import jsonify
 from flask import request , session
 from flask import Blueprint
-from models import Todo, db
+from models import Todo, db , Fcuser
 import requests,json
 from . import api
 import datetime
@@ -13,19 +13,40 @@ def send_slack(msg):
         } , headers={'Content-Type':'application/json'})
 
 
-@api.route('/todos' , methods=['GET','POST','DELETE'])
-def todos():
+@api.route('/todos/done' , methods=['PUT'])
+def todos_done():
     userid = session.get('userid',None)
     if not userid:
         ## 로그인이 안되면 401
         return jsonify(),401
 
+    data = request.get_json()
+    todo_id = data.get('todo_id')
+    todo = Todo.query.filter_by(id=todo_id).first()
+    fcuser = Fcuser.query.filter_by(userid=userid).first()
+    if todo.fcuser_id != fcuser.id:
+        return jsonify(), 401
+    
+    todo.status = 1
+    db.session.commit()
+    return jsonify()
+
+@api.route('/todos' , methods=['GET','POST','DELETE'])
+def todos():
+    userid = session.get('userid',1)
+    if not userid:
+        ## 로그인이 안되면 401
+        return jsonify(),401
     if request.method == 'POST':
         data = request.get_json()
-
+        # print(data)
         todo = Todo()
         todo.title = data.get('title')
+        todo.due = data.get('due')
         todo.fcuser_id = userid
+        todo.status = 0
+        fcuser = Fcuser.query.filter_by(userid=userid).first()
+        todo.fcuser_id = fcuser.id
 
         db.session.add(todo)
         db.session.commit()
@@ -36,7 +57,7 @@ def todos():
     elif request.method == 'GET':
         todos = Todo.query.filter_by(fcuser_id=userid)
         return jsonify([t.serialize for t in todos])
-
+#
     elif request.method == 'DELETE':
         data = request.get_json() 
         todo_id = data.get('todo_id')

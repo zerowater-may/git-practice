@@ -1,0 +1,25 @@
+ERROR [2021-03-09 00:01:58] [deborahr.robinson43]  Could not create webdriver; please make sure Appium is running
+ERROR [2021-03-09 00:04:18] [deborahr.robinson43]  Could not create webdriver; please make sure Appium is running
+ERROR [2021-03-09 00:04:45] [deborahr.robinson43]  Invalid Device Name. 
+List of available devices: [emulator-5554]
+ERROR [2021-03-09 00:04:45] [deborahr.robinson43]  Could not create webdriver; please make sure Appium is running
+ERROR [2021-03-09 00:06:28] [deborahr.robinson43]  Invalid Device Name. 
+List of available devices: [emulator-5554]
+ERROR [2021-03-09 00:06:42] [deborahr.robinson43]  Invalid Device Name. 
+List of available devices: [emulator-5554]
+ERROR [2021-03-09 00:06:51] [deborahr.robinson43]  Could not create webdriver; please make sure Appium is running
+ERROR [2021-03-09 00:07:55] [deborahr.robinson43]  Invalid Device Name. 
+List of available devices: [emulator-5554]
+ERROR [2021-03-09 00:08:47] [deborahr.robinson43]  Invalid Device Name. 
+List of available devices: [emulator-5554]
+ERROR [2021-03-09 00:08:51] [deborahr.robinson43]  Invalid Device Name. 
+List of available devices: [emulator-5554]
+ERROR [2021-03-09 00:09:17] [deborahr.robinson43]  Invalid Device Name. 
+List of available devices: [emulator-5554]
+ERROR [2021-03-09 00:09:17] [deborahr.robinson43]  Could not create webdriver; please make sure Appium is running
+ERROR [2021-03-09 00:09:30] [deborahr.robinson43]  Invalid Device Name. 
+List of available devices: []
+ERROR [2021-03-09 00:09:30] [deborahr.robinson43]  Could not create webdriver; please make sure Appium is running
+ERROR [2021-03-09 00:09:35] [deborahr.robinson43]  Invalid Device Name. 
+List of available devices: []
+ERROR [2021-03-09 00:09:35] [deborahr.robinson43]  Could not create webdriver; please make sure Appium is running
